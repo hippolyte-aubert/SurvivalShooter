@@ -74,6 +74,10 @@ namespace StarterAssets
 
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
+        
+        public float targetZoom = 40f;
+        public float zoomSpeed = 2;
+        private float _defaultZoom = 80f;
 
         // cinemachine
         private float _cinemachineTargetYaw;
@@ -106,11 +110,13 @@ namespace StarterAssets
         private Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
-        private GameObject _mainCamera;
+        public GameObject mainCamera;
 
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
+
+        private Camera _cam;
 
         private bool IsCurrentDeviceMouse
         {
@@ -128,10 +134,12 @@ namespace StarterAssets
         private void Awake()
         {
             // get a reference to our main camera
-            if (_mainCamera == null)
+            if (mainCamera == null)
             {
-                _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+                Debug.LogWarning("Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.", gameObject);
+                mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+            _cam = mainCamera.GetComponent<Camera>();
         }
 
         private void Start()
@@ -152,6 +160,15 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            
+            if (_input.cursorLocked)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            
+            _defaultZoom = mainCamera.GetComponent<Camera>().fieldOfView;
+            Debug.Log(_defaultZoom);
         }
 
         private void Update()
@@ -166,6 +183,9 @@ namespace StarterAssets
         private void LateUpdate()
         {
             CameraRotation();
+            
+            _cam.fieldOfView = Mathf.Lerp(_cam.fieldOfView, _input.zoom ? targetZoom : _defaultZoom, Time.deltaTime * zoomSpeed);
+            Debug.Log(_cam.fieldOfView);
         }
 
         private void AssignAnimationIDs()
@@ -258,7 +278,7 @@ namespace StarterAssets
             if (_input.move != Vector2.zero)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                  _mainCamera.transform.eulerAngles.y;
+                                  mainCamera.transform.eulerAngles.y;
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                     RotationSmoothTime);
 

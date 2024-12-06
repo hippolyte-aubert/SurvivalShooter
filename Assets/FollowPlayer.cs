@@ -56,6 +56,7 @@ public class FollowPlayer : MonoBehaviour
         
         // Camera rotation to look at the player
         cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, Quaternion.LookRotation((player.position + cameraOffset) - cameraTransform.position), Time.deltaTime * 5);
+        // cameraTransform.rotation = Quaternion.Euler(player.rotation.eulerAngles + cameraTransform.rotation.eulerAngles);
     }
 
     public void Zoom(bool isPressed)

@@ -20,9 +20,11 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 		
-		[Header("Cameraman")]
-		public FollowPlayer cameraman;
+		[Header("Shooting Settings")]
+		public PlayerShoot playerShoot;
 
+		[Header("Zoom Settings")] public bool zoom;
+		
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
 		{
@@ -39,7 +41,7 @@ namespace StarterAssets
 
 		public void OnJump(InputValue value)
 		{
-			JumpInput(value.isPressed);
+			// JumpInput(value.isPressed);
 		}
 
 		public void OnSprint(InputValue value)
@@ -47,14 +49,14 @@ namespace StarterAssets
 			SprintInput(value.isPressed);
 		}
 		
-		public void OnCameraZoom(InputValue value)
+		public void OnFire(InputValue value)
 		{
-			ZoomInput(value.isPressed);
+			FireInput(value.isPressed);
 		}
 		
-		public void OnCameraPause(InputValue value)
+		public void OnZoom(InputValue value)
 		{
-			PauseInput(value.isPressed);
+			ZoomInput(value.isPressed);
 		}
 #endif
 
@@ -71,7 +73,7 @@ namespace StarterAssets
 
 		public void JumpInput(bool newJumpState)
 		{
-			jump = newJumpState;
+			// jump = newJumpState;
 		}
 
 		public void SprintInput(bool newSprintState)
@@ -86,18 +88,19 @@ namespace StarterAssets
 
 		private void SetCursorState(bool newState)
 		{
-			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+			// Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+		}
+		
+		private void FireInput(bool newFireState)
+		{
+			playerShoot.Fire(newFireState);
 		}
 		
 		private void ZoomInput(bool newZoomState)
 		{
-			cameraman.Zoom(newZoomState);
+			zoom = newZoomState;
 		}
 		
-		private void PauseInput(bool newPauseState)
-		{
-			cameraman.PauseFollow(newPauseState);
-		}
 	}
 	
 }
