@@ -185,7 +185,6 @@ namespace StarterAssets
             CameraRotation();
             
             _cam.fieldOfView = Mathf.Lerp(_cam.fieldOfView, _input.zoom ? targetZoom : _defaultZoom, Time.deltaTime * zoomSpeed);
-            Debug.Log(_cam.fieldOfView);
         }
 
         private void AssignAnimationIDs()
