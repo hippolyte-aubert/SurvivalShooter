@@ -61,7 +61,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.2183406
+        functionName: EnableAttackCollider
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: bd505d23cb4b5904ca605db45edb8cdd, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.67248905
+        functionName: DisableAttackCollider
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: bd505d23cb4b5904ca605db45edb8cdd, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

@@ -54,10 +54,19 @@ namespace StarterAssets
 			FireInput(value.isPressed);
 		}
 		
-		public void OnZoom(InputValue value)
+		public void OnReload(InputValue value)
 		{
-			ZoomInput(value.isPressed);
+			ReloadInput(value.isPressed);
 		}
+		
+		public void OnPause(InputValue value)
+		{
+			if (value.isPressed)
+			{
+				PauseInput();
+			}
+		}
+
 #endif
 
 
@@ -96,9 +105,14 @@ namespace StarterAssets
 			playerShoot.Fire(newFireState);
 		}
 		
-		private void ZoomInput(bool newZoomState)
+		private void ReloadInput(bool newReloadState)
 		{
-			zoom = newZoomState;
+			playerShoot.Reload(newReloadState);
+		}
+		
+		private void PauseInput()
+		{
+			GameManager.instance.PauseGame();
 		}
 		
 	}

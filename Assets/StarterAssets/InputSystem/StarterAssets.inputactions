@@ -42,27 +42,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CameraZoom",
-                    "type": "Button",
-                    "id": "f29c2f7d-7b54-4b6d-beaa-39231a4887ae",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "CameraPause",
-                    "type": "Button",
-                    "id": "f1b96aeb-91d8-4129-8bc6-25f61babddd2",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Fire",
                     "type": "Button",
                     "id": "eef37b16-df62-4cd9-98b4-55ea2b52abdf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "1bc45140-4b8e-4069-a55e-e45d4757d926",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "7693ba4c-8497-4634-86cb-074e46d95099",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -248,34 +248,34 @@
                 },
                 {
                     "name": "",
-                    "id": "a166b9fd-4b51-43a8-bf60-f223b1514cd6",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraZoom",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9bd91a38-1c82-46c6-a6e1-9e8e4c68662f",
-                    "path": "<Keyboard>/leftCtrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraPause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "6e92dfa4-3cba-4ace-8f91-c255ffae9815",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b8328af-849a-402b-85df-1af2dc5ec7ec",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouse",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0a9aeab5-e069-46f2-a812-a0aa96172223",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
