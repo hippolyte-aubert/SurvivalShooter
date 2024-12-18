@@ -19,6 +19,11 @@ public class EnemyBehaviour : MonoBehaviour
     public BoxCollider attackCollider;
     
     private HealthSystem _healthSystem;
+
+    public AudioSource source;
+    public AudioClip footstepClip;
+    [Range(0, 1)] public float footstepAudioVolume = 0.5f;
+    public AudioClip attackClip;
     
     private void Awake()
     {
@@ -62,6 +67,7 @@ public class EnemyBehaviour : MonoBehaviour
             if (!isAttacking)
             {
                 _animator.SetTrigger("Attack");
+                source.PlayOneShot(attackClip);
                 StartCoroutine(Attack());
             }
         }
@@ -91,5 +97,13 @@ public class EnemyBehaviour : MonoBehaviour
         
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
+    }
+    
+    void OnZombieFootstep(AnimationEvent animationEvent)
+    {
+        if (animationEvent.animatorClipInfo.weight > 0.5f)
+        {
+            AudioSource.PlayClipAtPoint(footstepClip, transform.TransformPoint(Vector3.down * 1f), footstepAudioVolume);
+        }
     }
 }

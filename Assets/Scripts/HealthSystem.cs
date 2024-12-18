@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
@@ -13,6 +12,10 @@ public class HealthSystem : MonoBehaviour
     private readonly int _dieHash = Animator.StringToHash("Die");
     private readonly int _takeDamageHash = Animator.StringToHash("TakeDamage");
     private readonly int _deadHash = Animator.StringToHash("Dead");
+    
+    public AudioSource source;
+    public AudioClip hitSound;
+    public AudioClip deathSound;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -37,10 +40,14 @@ public class HealthSystem : MonoBehaviour
         if (health <= 0 && !isDead)
         {
             GameManager.instance.AddKillCount();
+            source.PlayOneShot(deathSound);
             isDead = true;
             _animator.SetBool(_deadHash, true);
             _animator.SetTrigger(_dieHash);
             Destroy(gameObject, 5f);
+            return;
         }
+        
+        if (!isDead) source.PlayOneShot(hitSound);
     }
 }

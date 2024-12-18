@@ -24,17 +24,16 @@ public class PlayerShoot : MonoBehaviour
     private bool _isReloading = false;
 
     public float bulletForce = 20f;
+    
+    public AudioSource gunAudio;
+    public AudioClip gunshotSound;
+    public AudioClip reloadSound;
+    public AudioClip emptySound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _currentAmmo = magazineSize;
         ammoText.text = _currentAmmo + "/" + magazineSize;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     
     public void Fire(bool state)
@@ -47,10 +46,15 @@ public class PlayerShoot : MonoBehaviour
     
     public void Shoot()
     {
-        if (_currentAmmo <= 0) return;
+        if (_currentAmmo <= 0)
+        {
+            gunAudio.PlayOneShot(emptySound);
+            return;
+        }
         
         _currentAmmo--;
         ammoText.text = _currentAmmo + "/" + magazineSize;
+        gunAudio.PlayOneShot(gunshotSound);
         Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
         Vector3 bulletDirection = ray.direction;
         Quaternion bulletRotation = Quaternion.LookRotation(bulletDirection);
@@ -76,6 +80,7 @@ public class PlayerShoot : MonoBehaviour
     
     IEnumerator ReloadImageAnimation()
     {
+        gunAudio.PlayOneShot(reloadSound);
         reloadImage.gameObject.SetActive(true);
         ammoText.transform.parent.gameObject.SetActive(false);
         reloadImage.fillAmount = 0;
